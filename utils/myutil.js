@@ -25,10 +25,26 @@ module.exports = {
     validateUser: function (compiledUserValidator, user_obj){
 
         const verdict = compiledUserValidator(user_obj);
-        console.log(verdict)
         if(!verdict){
-            console.log(compiledUserValidator.errors)
+            console.log(compiledUserValidator.errors);
         }
+        return verdict;
+
+    },
+
+    getUserSelectionClause: function (user_obj) {
+
+        let final_user_selection_clause = [];
+
+        if(user_obj['phone_e164']){
+            final_user_selection_clause.push({"phone_e164": user_obj['phone_e164']});
+        }
+
+        if(user_obj['email']){
+            final_user_selection_clause.push({"email": user_obj['email']});
+        }
+
+        return {"$or": final_user_selection_clause};
 
     }
 

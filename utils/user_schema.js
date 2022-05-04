@@ -3,9 +3,14 @@ module.exports = {
     type: "object",
     properties: {
         name: {type: "string"},
-        address: {type: "string"}
+        phone_e164: {type: "string"},
+        email: {type: "string"},
+        address: {type: "string"},
     },
-    required: ["name"],
+    anyOf: [
+        {required: ["phone_e164"]},
+        {required: ["email"]}
+    ],
     additionalProperties: false
 
 }
